@@ -13,11 +13,11 @@ require quack
 
 # Confirm the extension works
 query I
-SELECT quack('Sam');
+SELECT add_numbers_together(1,2);
 ----
-Quack Sam 🐥
+3
 
 query I
-SELECT quack_openssl_version('Michael') ILIKE 'Quack Michael, my linked OpenSSL version is OpenSSL%';
+SELECT add_numbers_together(2,2);
 ----
-true
+4
