@@ -27,7 +27,7 @@ func Register(connection C.duckdb_connection, info C.duckdb_extension_info) {
 
 	Check(duckdb.RegisterType(conn, "vec3", "float[3]"))
 
-	Check(duckdb.RegisterScalarUDFConn(conn, "normalize", Normalize{}))
+	Check(duckdb.RegisterScalarUDFConn(conn, "array_norm", VecNorm{}))
 
 	Check(duckdb.RegisterAggregateUDFConn[aggregates.ArraySumAggregateState](conn, "array_sum", aggregates.ArraySumAggregateFunc{}))
 
@@ -83,27 +83,30 @@ func Check(err error) {
 	}
 }
 
-type Normalize struct {
+type VecNorm struct {
 }
 
-func (udf Normalize) Config() duckdb.ScalarFunctionConfig {
+func (udf VecNorm) Config() duckdb.ScalarFunctionConfig {
 	return duckdb.ScalarFunctionConfig{
 		InputTypes: []string{"FLOAT[3]"},
 		ResultType: "FLOAT",
 	}
 }
 
-func (udf Normalize) Exec(ctx *duckdb.ExecContext) error {
-	in, out := ctx.AcquireChunk(), ctx.AcquireVector()
+func (udf VecNorm) Exec(ctx *duckdb.ExecContext) error {
+	var chunkSize = ctx.ChunkSize()
+
 	var a duckdb.ArrayType[float32]
-	_ = a.Load(in, 0)
+	_ = a.LoadCtx(ctx, 0, chunkSize)
+
+	var out = duckdb.UDFScalarVectorResult[float32](ctx)[:chunkSize]
 
 	for i := 0; i < a.Rows(); i++ {
 		var norm float32
 		for _, v := range a.GetRow(i) {
 			norm += v * v
 		}
-		duckdb.Append(out, float32(math.Sqrt(float64(norm))))
+		out[i] = float32(math.Sqrt(float64(norm)))
 	}
 	return nil
 }
