@@ -21,3 +21,8 @@ query I
 SELECT add_numbers_together(2,2);
 ----
 4
+
+query I
+SELECT xxhash_64_v2('hello');
+----
+2794345569481354659

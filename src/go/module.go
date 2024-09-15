@@ -3,12 +3,11 @@ package main
 /*
 #include <stdlib.h>
 #include <duckdb.h>
-
-
 */
 import "C"
 import (
 	"fmt"
+	"github.com/cespare/xxhash/v2"
 	"github.com/marcboeker/go-duckdb"
 	"github.com/marcboeker/go-duckdb/aggregates"
 	"math"
@@ -28,6 +27,8 @@ func Register(connection C.duckdb_connection, info C.duckdb_extension_info) {
 	Check(duckdb.RegisterType(conn, "vec3", "float[3]"))
 
 	Check(duckdb.RegisterScalarUDFConn(conn, "array_norm", VecNorm{}))
+
+	Check(duckdb.RegisterScalarUDFConn(conn, "xxhash_64_v2", xxhash64V2{}))
 
 	Check(duckdb.RegisterAggregateUDFConn[aggregates.ArraySumAggregateState](conn, "array_sum", aggregates.ArraySumAggregateFunc{}))
 
@@ -81,6 +82,31 @@ func Check(err error) {
 	if err != nil {
 		panic(err)
 	}
+}
+
+type xxhash64V2 struct {
+}
+
+func (xxh xxhash64V2) Config() duckdb.ScalarFunctionConfig {
+	return duckdb.ScalarFunctionConfig{
+		InputTypes: []string{duckdb.VARCHAR},
+		ResultType: duckdb.UBIGINT,
+	}
+}
+
+func (xxh xxhash64V2) Exec(ctx *duckdb.ExecContext) error {
+	var chunkSize = ctx.ChunkSize()
+
+	var a duckdb.Vec[duckdb.Varchar]
+	_ = a.LoadCtx(ctx, 0, chunkSize)
+
+	var out = duckdb.UDFScalarVectorResult[uint64](ctx)[:chunkSize]
+	var in = a.Data[:chunkSize]
+
+	for i, v := range in {
+		out[i] = xxhash.Sum64(v.Bytes())
+	}
+	return nil
 }
 
 type VecNorm struct {
