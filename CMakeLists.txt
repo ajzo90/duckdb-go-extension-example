@@ -40,6 +40,7 @@ ExternalProject_Add(
 include_directories(${BUILD_DIR})
 
 build_loadable_extension_capi(${TARGET_NAME} ${CAPI_VERSION} ${SOURCES})
+#build_static_extension(${TARGET_NAME} ${SOURCES})
 
 target_link_libraries(
   ${LOADABLE_EXTENSION_NAME}
