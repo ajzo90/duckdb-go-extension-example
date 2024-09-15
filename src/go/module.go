@@ -9,7 +9,7 @@ package main
 import "C"
 import (
 	"fmt"
-	duckdb "github.com/marcboeker/go-duckdb"
+	"github.com/marcboeker/go-duckdb"
 	"github.com/marcboeker/go-duckdb/aggregates"
 	"math"
 	"unsafe"
