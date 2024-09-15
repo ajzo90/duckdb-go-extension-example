@@ -19,6 +19,7 @@ jobs:
       duckdb_version: main
       extension_name: quack
       enable_go: true
+      exclude_archs: linux_amd64;osx_amd64;windows_amd64;windows_arm64
 
 #  duckdb-stable-build:
 #    name: Build extension binaries
