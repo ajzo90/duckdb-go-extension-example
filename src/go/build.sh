@@ -1,5 +1,5 @@
 #!/bin/bash
-CURRENT_DIR=$(PWD)
+CURRENT_DIR=$(pwd)
 echo $CURRENT_DIR
 SRC_DIR="$1"
 DUCKDB_LIB_PATH=$(realpath "$2")
