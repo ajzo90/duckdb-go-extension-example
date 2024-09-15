@@ -1,5 +1,6 @@
 #!/bin/bash
 CURRENT_DIR=$(pwd)
+echo "Inside build.sh '$DUCKDB_PLATFORM' for the quack extension."
 
 go env GOARCH GOOS
 echo $CURRENT_DIR
