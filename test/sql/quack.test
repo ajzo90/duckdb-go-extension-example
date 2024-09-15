@@ -23,6 +23,11 @@ SELECT add_numbers_together(2,2);
 4
 
 query I
-SELECT xxhash_64('hello');
+SELECT xxhash64('hello');
 ----
 2794345569481354659
+
+query I
+SELECT xxh3('Helloworld');
+----
+13050875471165943247

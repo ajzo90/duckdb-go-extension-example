@@ -7,6 +7,7 @@ replace github.com/marcboeker/go-duckdb v0.0.0 => github.com/ajzo90/go-duckdb v0
 require (
 	github.com/cespare/xxhash/v2 v2.3.0
 	github.com/marcboeker/go-duckdb v0.0.0
+	github.com/zeebo/xxh3 v1.0.2
 )
 
 require (
@@ -19,7 +20,6 @@ require (
 	github.com/klauspost/cpuid/v2 v2.2.5 // indirect
 	github.com/mitchellh/mapstructure v1.5.0 // indirect
 	github.com/pierrec/lz4/v4 v4.1.18 // indirect
-	github.com/zeebo/xxh3 v1.0.2 // indirect
 	golang.org/x/exp v0.0.0-20231006140011-7918f672742d // indirect
 	golang.org/x/mod v0.13.0 // indirect
 	golang.org/x/sys v0.13.0 // indirect
