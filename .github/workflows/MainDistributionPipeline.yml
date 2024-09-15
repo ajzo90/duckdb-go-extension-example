@@ -14,14 +14,14 @@ concurrency:
 jobs:
   duckdb-next-build:
     name: Build extension binaries
-    uses: ./_extension_distribution.yml@main
+    uses: ./.github/workflows/_extension_distribution.yml@main
     with:
       duckdb_version: main
       extension_name: quack
 
   duckdb-stable-build:
     name: Build extension binaries
-    uses: ./_extension_distribution.yml@main
+    uses: ./.github/workflows/_extension_distribution.yml@main
     with:
       duckdb_version: v1.1.0
       extension_name: quack
