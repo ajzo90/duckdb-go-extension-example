@@ -1,7 +1,7 @@
 github.com/OneOfOne/xxhash v1.2.2 h1:KMrpdQIwFcEqXDklaen+P1axHaj9BSKzvpUUfnHldSE=
 github.com/OneOfOne/xxhash v1.2.2/go.mod h1:HSdplMjZKSmBqAxg5vPj2TmRDmfkzw+cTzAElWljhcU=
-github.com/ajzo90/go-duckdb v0.0.0-20240915135034-1b6ba32a5acf h1:sBMYYiWGmKyMkOId59UV1NHq6SIP6usrEB7e50ctutE=
-github.com/ajzo90/go-duckdb v0.0.0-20240915135034-1b6ba32a5acf/go.mod h1:/4LKCVqrCki1mszJzMixG2GvMKKSRS+NcBfLC7KLz4o=
+github.com/ajzo90/go-duckdb v0.0.0-20240915142642-c4c6cc824370 h1:Q+3nhlfMBzWo/zSe26KKHniL7K+hcBCwvYdiQDUpiNc=
+github.com/ajzo90/go-duckdb v0.0.0-20240915142642-c4c6cc824370/go.mod h1:/4LKCVqrCki1mszJzMixG2GvMKKSRS+NcBfLC7KLz4o=
 github.com/apache/arrow/go/v15 v15.0.2 h1:60IliRbiyTWCWjERBCkO1W4Qun9svcYoZrSLcyOsMLE=
 github.com/apache/arrow/go/v15 v15.0.2/go.mod h1:DGXsR3ajT524njufqf95822i+KTh+yea1jass9YXgjA=
 github.com/cespare/xxhash v1.1.0 h1:a6HrQnmkObjyL+Gs60czilIUGqrzKutQD6XZog3p+ko=

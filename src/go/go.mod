@@ -2,7 +2,7 @@ module duckdb/go-extension
 
 go 1.23
 
-replace github.com/marcboeker/go-duckdb v1.6.6 => github.com/ajzo90/go-duckdb v0.0.0-20240915135034-1b6ba32a5acf
+replace github.com/marcboeker/go-duckdb v1.6.6 => github.com/ajzo90/go-duckdb v0.0.0-20240915142642-c4c6cc824370
 
 require github.com/marcboeker/go-duckdb v1.6.6
 

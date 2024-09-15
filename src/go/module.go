@@ -10,6 +10,8 @@ import "C"
 import (
 	"fmt"
 	duckdb "github.com/marcboeker/go-duckdb"
+	"github.com/marcboeker/go-duckdb/aggregates"
+	"math"
 	"unsafe"
 )
 
@@ -19,10 +21,15 @@ func Register(connection C.duckdb_connection, info C.duckdb_extension_info) {
 		panic(fmt.Sprintf("failed to register extension: %s, need better error handling", err.Error()))
 	}
 
-	conn := (duckdb.Connection)(unsafe.Pointer(connection))
+	conn := duckdb.UpgradeConn((duckdb.Connection)(unsafe.Pointer(connection)))
 
-	Check(duckdb.RegisterCastConn(conn, VarcharToTinyInt{}))
-	Check(duckdb.RegisterTypeConn(conn, "vec3", "float[3]"))
+	Check(duckdb.RegisterCast(conn, VarcharToTinyInt{}))
+
+	Check(duckdb.RegisterType(conn, "vec3", "float[3]"))
+
+	Check(duckdb.RegisterScalarUDFConn(conn, "normalize", Normalize{}))
+
+	Check(duckdb.RegisterAggregateUDFConn[aggregates.ArraySumAggregateState](conn, "array_sum", aggregates.ArraySumAggregateFunc{}))
 
 }
 
@@ -74,4 +81,29 @@ func Check(err error) {
 	if err != nil {
 		panic(err)
 	}
+}
+
+type Normalize struct {
+}
+
+func (udf Normalize) Config() duckdb.ScalarFunctionConfig {
+	return duckdb.ScalarFunctionConfig{
+		InputTypes: []string{"FLOAT[3]"},
+		ResultType: "FLOAT",
+	}
+}
+
+func (udf Normalize) Exec(ctx *duckdb.ExecContext) error {
+	in, out := ctx.AcquireChunk(), ctx.AcquireVector()
+	var a duckdb.ArrayType[float32]
+	_ = a.Load(in, 0)
+
+	for i := 0; i < a.Rows(); i++ {
+		var norm float32
+		for _, v := range a.GetRow(i) {
+			norm += v * v
+		}
+		duckdb.Append(out, float32(math.Sqrt(float64(norm))))
+	}
+	return nil
 }
