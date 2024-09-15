@@ -32,6 +32,6 @@ go env GOARCH GOOS
 SRC_DIR="$1"
 DUCKDB_LIB_PATH=$(realpath "$2")
 ls -l $DUCKDB_LIB_PATH
-(cd "$SRC_DIR" && GOOS=$GOOS GOARCH=$GOARCH go mod tidy && GOOS=$GOOS GOARCH=$GOARCH CGO_CFLAGS="-I${DUCKDB_LIB_PATH}/" CGO_LDFLAGS="-L${DUCKDB_LIB_PATH}" CGO_ENABLED=1 GOWORK=off go build -buildmode=c-archive -o "$CURRENT_DIR" .)
+(cd "$SRC_DIR" && GOOS=$GOOS GOARCH=$GOARCH go mod tidy && echo "start build" && GOOS=$GOOS GOARCH=$GOARCH CGO_CFLAGS="-I${DUCKDB_LIB_PATH}/" CGO_LDFLAGS="-L${DUCKDB_LIB_PATH}" CGO_ENABLED=1 GOWORK=off go build -buildmode=c-archive -o "$CURRENT_DIR" .)
 echo "Whats in current dir?"
 ls -sl "$CURRENT_DIR"
