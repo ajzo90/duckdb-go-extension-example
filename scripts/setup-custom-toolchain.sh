@@ -9,6 +9,4 @@
 # note that the $DUCKDB_PLATFORM environment variable can be used to discern between the platforms
 echo "This is the sample custom toolchain script running for architecture '$DUCKDB_PLATFORM' for the quack extension."
 
-./src/go/build.sh
-
-../src/go/build.sh
+./src/go/build.sh './src/go/build.sh' './duckdb/src/include'
