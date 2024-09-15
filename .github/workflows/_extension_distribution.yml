@@ -220,7 +220,7 @@ jobs:
         if: ${{ (inputs.enable_go || contains(format(';{0};', inputs.extra_toolchains), ';go;'))}}
         uses: actions/setup-go@v4
         with:
-          go-version: '1.22'
+          go-version: '1.23'
 
       - name: Install CMake 3.21
         if: ${{ matrix.duckdb_arch == 'linux_amd64' || matrix.duckdb_arch == 'linux_arm64' }}
@@ -417,7 +417,7 @@ jobs:
         if: ${{ (inputs.enable_go || contains(format(';{0};', inputs.extra_toolchains), ';go;'))}}
         uses: actions/setup-go@v4
         with:
-          go-version: '1.22'
+          go-version: '1.23'
 
       - name: Install parser tools
         if: ${{ contains(format(';{0};', inputs.extra_toolchains), ';parser_tools;')}}
@@ -521,7 +521,7 @@ jobs:
         if: ${{ (inputs.enable_go || contains(format(';{0};', inputs.extra_toolchains), ';go;'))}}
         uses: actions/setup-go@v4
         with:
-          go-version: '1.22'
+          go-version: '1.23'
 
       - name: Install parser tools
         if: ${{ contains(format(';{0};', inputs.extra_toolchains), ';parser_tools;')}}
@@ -638,7 +638,7 @@ jobs:
         if: ${{ (inputs.enable_go || contains(format(';{0};', inputs.extra_toolchains), ';go;'))}}
         uses: actions/setup-go@v4
         with:
-          go-version: '1.22'
+          go-version: '1.23'
 
       - name: Setup vcpkg
         uses: lukka/run-vcpkg@v11.1
