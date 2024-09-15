@@ -1,9 +1,31 @@
 #!/bin/bash
 CURRENT_DIR=$(pwd)
 echo "Inside build.sh '$DUCKDB_PLATFORM' for the quack extension."
+echo $CURRENT_DIR
+
 
 go env GOARCH GOOS
-echo $CURRENT_DIR
+
+if [ "$DUCKDB_PLATFORM" == "osx_amd64" ]; then
+export GOOS=darwin
+export GOARCH=amd64
+elif [ "$DUCKDB_PLATFORM" == "osx_arm64" ]; then
+export GOOS=darwin
+export GOARCH=arm64
+elif [ "$DUCKDB_PLATFORM" == "linux_amd64_gcc4" ]; then
+export GOOS=linux
+export GOARCH=amd64
+elif [ "$DUCKDB_PLATFORM" == "linux_arm64" ]; then
+export GOOS=linux
+export GOARCH=arm64
+elif [ "$DUCKDB_PLATFORM" == "linux_amd64" ]; then
+export GOOS=linux
+export GOARCH=amd64
+fi
+
+go env GOARCH GOOS
+
+
 SRC_DIR="$1"
 DUCKDB_LIB_PATH=$(realpath "$2")
 ls -l $DUCKDB_LIB_PATH
