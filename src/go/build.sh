@@ -1,5 +1,7 @@
 #!/bin/bash
 CURRENT_DIR=$(pwd)
+
+go env GOARCH GOOS
 echo $CURRENT_DIR
 SRC_DIR="$1"
 DUCKDB_LIB_PATH=$(realpath "$2")
