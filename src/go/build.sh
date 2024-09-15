@@ -8,7 +8,6 @@ go env GOARCH GOOS
 
 
 if [ "$DUCKDB_PLATFORM" == "osx_amd64" ]; then
-export CC=aarch64-linux-gnu-gcc
 export GOOS=darwin
 export GOARCH=amd64
 elif [ "$DUCKDB_PLATFORM" == "osx_arm64" ]; then
@@ -18,6 +17,7 @@ elif [ "$DUCKDB_PLATFORM" == "linux_amd64_gcc4" ]; then
 export GOOS=linux
 export GOARCH=amd64
 elif [ "$DUCKDB_PLATFORM" == "linux_arm64" ]; then
+export CC=aarch64-linux-gnu-gcc
 export GOOS=linux
 export GOARCH=arm64
 elif [ "$DUCKDB_PLATFORM" == "linux_amd64" ]; then
