@@ -1,6 +1,6 @@
 module duckdb/go-extension
 
-go 1.23
+go 1.24
 
 replace github.com/marcboeker/go-duckdb v0.0.0 => github.com/ajzo90/go-duckdb v0.0.0-20240915142642-c4c6cc824370
 
@@ -16,7 +16,7 @@ require (
 	github.com/goccy/go-json v0.10.2 // indirect
 	github.com/google/flatbuffers v23.5.26+incompatible // indirect
 	github.com/google/uuid v1.3.1 // indirect
-	github.com/klauspost/compress v1.16.7 // indirect
+	github.com/klauspost/compress v1.18.7 // indirect
 	github.com/klauspost/cpuid/v2 v2.2.5 // indirect
 	github.com/mitchellh/mapstructure v1.5.0 // indirect
 	github.com/pierrec/lz4/v4 v4.1.18 // indirect
